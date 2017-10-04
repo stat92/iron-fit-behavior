@@ -234,15 +234,6 @@ within `fitInto` boundaries, while preserving the element's CSS margin values.
      * The horizontal align value, accounting for the RTL/LTR text direction.
      */
     get _localeHorizontalAlign() {
-      if (this._isRTL) {
-        // In RTL, "left" becomes "right".
-        if (this.horizontalAlign === 'right') {
-          return 'left';
-        }
-        if (this.horizontalAlign === 'left') {
-          return 'right';
-        }
-      }
       return this.horizontalAlign;
     },
 
@@ -250,7 +241,7 @@ within `fitInto` boundaries, while preserving the element's CSS margin values.
       // Memoize this to avoid expensive calculations & relayouts.
       // Make sure we do it only once
       if (typeof this._isRTL === 'undefined') {
-        this._isRTL = window.getComputedStyle(this).direction == 'rtl';
+        this._isRTL = false;
       }
       this.positionTarget = this.positionTarget || this._defaultPositionTarget;
       if (this.autoFitOnAttach) {
